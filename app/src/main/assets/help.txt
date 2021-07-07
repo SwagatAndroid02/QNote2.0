@@ -1,0 +1,11 @@
+Q 1.Where are the csv file saved?
+A 1.First of all you need to install a file manager app in your device. Then follow this path - Internal storage > QNote > qnote.csv.
+
+Q 2.How to delete individual note?
+A  2.In order to delete individual note swipe the item LEFT/RIGHT.
+
+Q 3.How to use voice to text feature in QNote app?
+A 3.Open new note-add page click on mic icon on top right position once it's activated, start speaking your note.
+
+Q 4.How to delete note?
+A 4.At home screen swipe the note you wish to delete from right to left or left to right to delete it. To delete all notes together click on menu button (three dots on top right corner) and select - Delete All Notes

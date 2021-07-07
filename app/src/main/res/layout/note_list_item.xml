@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notes_item_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:padding="24dp">
+
+    <ImageView
+        android:id="@+id/notes_item_iv_avatar"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginRight="10dp"
+        tools:srcCompat="@tools:sample/avatars"
+        android:visibility="gone"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+    <TextView
+        android:id="@+id/notes_item_tv_datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="June 20, 2021"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/notes_item_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Topic name"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/notes_item_tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="u can rename it as anything by doing this after the first.."
+        android:textSize="14sp"
+        android:lines="1"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/notes_item_iv_fav"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_star_unselected" />
+
+    <TextView
+        android:id="@+id/notes_item_txt_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+</LinearLayout>
