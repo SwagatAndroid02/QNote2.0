@@ -67,6 +67,8 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
+    implementation 'com.github.dhaval2404:imagepicker:1.7.5'
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
 
     //test
     testImplementation 'junit:junit:4.+'

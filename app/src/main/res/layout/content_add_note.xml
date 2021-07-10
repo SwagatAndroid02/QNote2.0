@@ -36,11 +36,27 @@
         android:layout_below="@+id/et_title"
         android:background="@null"/>
 
-        <ImageView
-            android:id="@+id/iv_image"
+        <RelativeLayout
+            android:id="@+id/add_note_image_parent"
+            android:layout_below="@+id/et_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerInside"/>
+            android:layout_marginTop="16dp">
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"/>
+            <ImageView
+                android:id="@+id/add_note_image_close"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_menu_close"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
 
     </RelativeLayout>
 

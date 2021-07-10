@@ -20,7 +20,7 @@ data class Notes(
     val web_link: String?,
 
     @ColumnInfo(name = "dateTimeAdded")
-    val date_time_added: String,
+    val date_time_added: String?,
 
     @ColumnInfo(name = "dateTimeModified")
     val date_time_modified: String?,

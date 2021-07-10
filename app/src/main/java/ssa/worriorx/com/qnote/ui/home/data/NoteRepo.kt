@@ -9,17 +9,17 @@ class NoteRepo(private val dao: NoteDao) {
 
     val allNote = dao.getAllNotes()
 
-    val getUpdatedNotes = dao.getUpdatedAllNotes()
+    val allNoteByCat = dao.getAllNoteByCategory()
 
     val allTrashedNotes = dao.getAllTrashedNotes()
 
-    val allCategory = dao.getCategoryNames()
 
     val allFavorite = dao.getAllFavNotes()
 
-    val allUncategorized = dao.getUnCategorizedNotes()
 
-    //val getTrashNoteIds = dao.getTrashNotesIds()
+    suspend fun format(){
+        dao.deleteAllNotes()
+    }
 
     suspend fun getTID():MutableList<Int>{
         return dao.getTrashNotesIds()
@@ -33,20 +33,14 @@ class NoteRepo(private val dao: NoteDao) {
         dao.updateNote(notes)
     }
 
-    suspend fun delete(notes: Notes){
-        dao.deleteNote(notes)
-    }
-
-    suspend fun setCatg(ids: List<Int>,catagory: String){
-        dao.setCategory(ids,catagory)
-    }
-
-    suspend fun getNotesByCatg(@NonNull catagory: String):MutableList<Notes>{
-        return dao.getNotesByCatagory(catagory)
-    }
 
     suspend fun getNoteById(@NonNull id: Int):MutableList<Notes>{
         return dao.getNotesById(id)
+    }
+
+
+    suspend fun getAllCategories():MutableList<String>{
+        return dao.getAllCategoriess()
     }
 
     suspend fun deleteSingl(@NonNull id: Int){
@@ -61,16 +55,15 @@ class NoteRepo(private val dao: NoteDao) {
         dao.setTrashed(ids,isTrashed)
     }
 
-    suspend fun renameCatg(@NonNull oldName: String,@NonNull newName: String){
-        dao.renameCategory(oldName, newName)
+
+    suspend fun unTrashed(ids: Int,isTrashed: Boolean){
+        dao.unTrashed(ids,isTrashed)
     }
 
-    suspend fun deleteByCatg(@NonNull categoryName: String){
-        dao.deleteByCategory(categoryName)
+    suspend fun setUnSetfav(id: Int,fav: Boolean){
+        dao.setUnsetFavorite(id,fav)
     }
 
-   /* suspend fun getTrashNoteIds():MutableList<Int>{
-        return dao.getTrashNotesIds()
-    }*/
+
 
 }

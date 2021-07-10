@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.trash_note_list_item.view.notes_item_paren
 import ssa.worriorx.com.qnote.R
 import ssa.worriorx.com.qnote.ui.home.db.room.Notes
 
-class TrashNoteAdapter (val onRemove: TrashNoteAdapter.OnRemoveItem) : ListAdapter<Notes, TrashNoteAdapter.NotesViewHolder>(
+class TrashNoteAdapter (val onRemoveUnRemove: OnDeleteUndeleteItem) : ListAdapter<Notes, TrashNoteAdapter.NotesViewHolder>(
         object : DiffUtil.ItemCallback<Notes>(){
             override fun areItemsTheSame(oldItem: Notes, newItem: Notes): Boolean {
                 return oldItem == newItem
@@ -54,16 +54,22 @@ class TrashNoteAdapter (val onRemove: TrashNoteAdapter.OnRemoveItem) : ListAdapt
                     .into(iv_thumbnail)
         }
 
-        holder.itemView.notes_item_parent.setOnClickListener(object : View.OnClickListener {
+        iv_restore.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                onRemoveUnRemove.onRestoreItemById(itemView.id)
+            }
+        })
+
+       /* holder.itemView.notes_item_parent.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 deleteItem(itemView.id)
             }
 
-        })
+        })*/
     }
 
     fun deleteItem(id: Int) {
-        onRemove.onRemoveItemById(id)
+        onRemoveUnRemove.onRemoveItemById(id)
     }
 
     override fun submitList(list: MutableList<Notes>?) {
@@ -71,7 +77,8 @@ class TrashNoteAdapter (val onRemove: TrashNoteAdapter.OnRemoveItem) : ListAdapt
         notifyDataSetChanged()
     }
 
-    interface OnRemoveItem{
+    interface OnDeleteUndeleteItem{
         fun onRemoveItemById(id: Int)
+        fun onRestoreItemById(id: Int)
     }
 }

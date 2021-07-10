@@ -19,7 +19,7 @@ interface NoteDao {
     @Query("DELETE FROM note_data_table")
     suspend fun deleteAllNotes()
 
-    @Query("SELECT * FROM note_data_table WHERE trashed = 0")
+    @Query("SELECT * FROM note_data_table WHERE trashed = 0 ORDER BY note_id DESC")
     fun getAllNotes(): LiveData<MutableList<Notes>>
 
     @Query("SELECT * FROM note_data_table WHERE trashed = 0")
@@ -31,8 +31,14 @@ interface NoteDao {
     @Query("SELECT * FROM note_data_table WHERE category = null")
     fun getUnCategorizedNotes(): LiveData<MutableList<Notes>>
 
-    @Query("SELECT * FROM note_data_table WHERE trashed = 1")
+    @Query("SELECT * FROM note_data_table WHERE trashed = 1 ORDER BY note_id DESC")
     fun getAllTrashedNotes(): LiveData<MutableList<Notes>>
+
+    @Query("SELECT * FROM note_data_table ORDER BY category ASC")
+    fun getAllNoteByCategory(): LiveData<MutableList<Notes>>
+
+    @Query("SELECT DISTINCT  category FROM note_data_table")
+    fun getAllCategoriess(): MutableList<String>
 
     @Query("UPDATE note_data_table SET category=:catagory WHERE note_id IN (:ids)")
     fun setCategory(ids: List<Int>,catagory: String)
@@ -52,8 +58,14 @@ interface NoteDao {
     @Query("UPDATE note_data_table SET trashed=:isTrashed WHERE note_id=:id")
     fun setTrashed(id: Int,isTrashed: Boolean)
 
+    @Query("UPDATE note_data_table SET trashed=:isTrashed WHERE note_id=:id")
+    fun unTrashed(id: Int,isTrashed: Boolean)
+
+    @Query("UPDATE note_data_table SET favorite=:fav WHERE note_id=:id")
+    fun setUnsetFavorite(id: Int,fav: Boolean)
+
     @Query("SELECT category from note_data_table")
-    fun getCategoryNames(): LiveData<List<String>>
+    fun getCategoryNames(): LiveData<MutableList<String>>
 
     @Query("UPDATE note_data_table SET category=:newName WHERE  category=:oldName")
     fun renameCategory(@NonNull oldName: String,@NonNull newName: String)

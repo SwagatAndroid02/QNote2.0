@@ -14,8 +14,11 @@ import ssa.worriorx.com.qnote.ui.home.db.room.Notes
 class NoteViewModel(private val repo: NoteRepo): ViewModel() {
 
 
-    private val _notes = MutableLiveData<List<Notes>>()
-    val notes: LiveData<List<Notes>> = _notes
+    private val _notes = MutableLiveData<MutableList<Notes>>()
+    val notes: LiveData<MutableList<Notes>> = _notes
+
+    private val _categories = MutableLiveData<MutableList<String>>()
+    val categories: LiveData<MutableList<String>> = _categories
 
     private val _ids = MutableLiveData<List<Int>>()
     val ids: LiveData<List<Int>> = _ids
@@ -28,37 +31,31 @@ class NoteViewModel(private val repo: NoteRepo): ViewModel() {
         repo.update(note)
     }
 
-    fun delete(note: Notes):Job = viewModelScope.launch(Dispatchers.IO) {
-        repo.delete(note)
+
+    fun format():Job = viewModelScope.launch(Dispatchers.IO) {
+        repo.format()
     }
 
     val getAllNotes = repo.allNote
 
-    val getUpdateNotes = repo.getUpdatedNotes
+    val getAllNoteByCat = repo.allNoteByCat
+
 
     val getAllTrashedNotes = repo.allTrashedNotes
 
-    val categoryNames = repo.allCategory
 
     val favoriteNotes = repo.allFavorite
 
-    val unCategorized = repo.allUncategorized
 
-    //val getTrashId = repo.getTrashNoteIds
-
-    fun setCatg(ids: List<Int>,catagory: String): Job = viewModelScope.launch(Dispatchers.IO) {
-        repo.setCatg(ids,catagory)
+    fun getAllCategories():Job = viewModelScope.launch(Dispatchers.IO) {
+        repo.getAllCategories().let {
+            _categories.postValue(it)
+        }
     }
 
     fun getTID(): Job = viewModelScope.launch(Dispatchers.IO) {
         repo.getTID().let {
             _ids.postValue(it)
-        }
-    }
-
-    fun getNoteByCat(@NonNull catagory: String): Job = viewModelScope.launch(Dispatchers.IO) {
-        repo.getNotesByCatg(catagory).let {
-            _notes.postValue(it)
         }
     }
 
@@ -80,12 +77,13 @@ class NoteViewModel(private val repo: NoteRepo): ViewModel() {
         repo.setTrashed(ids,isTrashed)
     }
 
-    fun renameCategory(@NonNull oldName: String,@NonNull newName: String):Job = viewModelScope.launch(Dispatchers.IO) {
-        repo.renameCatg(oldName, newName)
+    fun unTrashed(ids: Int,isTrashed: Boolean):Job = viewModelScope.launch(Dispatchers.IO) {
+        repo.unTrashed(ids,isTrashed)
     }
 
-    fun deleteByCategory(@NonNull categoryName: String):Job = viewModelScope.launch(Dispatchers.IO) {
-        repo.deleteByCatg(categoryName)
+    fun setUnSetFavorite(id: Int,fav: Boolean): Job = viewModelScope.launch(Dispatchers.IO) {
+        repo.setUnSetfav(id,fav)
     }
+
 
 }

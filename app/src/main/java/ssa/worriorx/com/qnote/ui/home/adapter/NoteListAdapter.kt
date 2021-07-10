@@ -1,5 +1,6 @@
 package ssa.worriorx.com.qnote.ui.home.adapter
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
@@ -15,9 +16,11 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.note_list_item.view.*
 import ssa.worriorx.com.qnote.R
 import ssa.worriorx.com.qnote.ui.home.db.room.Notes
+import ssa.worriorx.com.qnote.ui.home.utils.GoToViewActivity
+import ssa.worriorx.com.qnote.ui.home.utils.SetUnSetFavorite
 import ssa.worriorx.com.qnote.ui.home.utils.Utils
 
-class NoteListAdapter(val onRemove: OnRemoveItem) : ListAdapter<Notes, NoteListAdapter.NotesViewHolder>(
+class NoteListAdapter(val goToViewAct: GoToViewActivity, val setUnSetFav: SetUnSetFavorite) : ListAdapter<Notes, NoteListAdapter.NotesViewHolder>(
     object : DiffUtil.ItemCallback<Notes>(){
         override fun areItemsTheSame(oldItem: Notes, newItem: Notes): Boolean {
             return oldItem == newItem
@@ -66,19 +69,26 @@ class NoteListAdapter(val onRemove: OnRemoveItem) : ListAdapter<Notes, NoteListA
                 .into(iv_thumbnail)
         }
 
-        tv_dateTime.text = Utils.dateTimeCovertor(itemView.date_time_added)
+        tv_dateTime.text = itemView.date_time_added?.let { Utils.dateTimeCovertor(it) }
 
-        holder.itemView.notes_item_parent.setOnClickListener(object : View.OnClickListener {
+        iv_star.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                trashItem(itemView.id)
+               if (itemView.starred == 0)
+                   setUnSetFav.onSetUnSet(itemView.id,true)
+                if (itemView.starred == 1)
+                    setUnSetFav.onSetUnSet(itemView.id,false)
             }
 
         })
+
+
+        holder.itemView.notes_item_parent.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+               goToViewAct.onViewActivityPass(itemView.id)
+            }
+        })
     }
 
-    fun trashItem(id: Int) {
-        onRemove.onRemoveItemById(id)
-    }
 
     override fun submitList(list: MutableList<Notes>?) {
         super.submitList(list)
@@ -88,4 +98,12 @@ class NoteListAdapter(val onRemove: OnRemoveItem) : ListAdapter<Notes, NoteListA
     interface OnRemoveItem{
         fun onRemoveItemById(id: Int)
     }
+
+    /*interface SetUnSetFavorite{
+        fun onSetUnSet(id: Int,b: Boolean)
+    }*/
+
+   /* interface GoToViewActivity{
+        fun onViewActivityPass(id: Int)
+    }*/
 }
