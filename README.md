@@ -1,5 +1,5 @@
-![ssgit (banner)](https://user-images.githubusercontent.com/39851751/125206037-a7a32b80-e2a2-11eb-8662-9282be53e86c.png)
 # QNote2.0
+![ssgit (banner)](https://user-images.githubusercontent.com/39851751/125206037-a7a32b80-e2a2-11eb-8662-9282be53e86c.png)
 **QNote2.0**/**QNote Lite** is an open-source application with very simple interface but morden approach under the hood.
 The project was inspired by the curiosity of learning and update my skills in android application development world.
 It aims to provide an attractive look and follow the most recent design guidelines as well as.
