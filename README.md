@@ -5,5 +5,5 @@ It aims to provide an attractive look and follow the most recent design guidelin
 Kotlin, coroutines, Room db all tied with mvvm architecture made the application seamless to use.
 
 ## Features
-
+- One
 
