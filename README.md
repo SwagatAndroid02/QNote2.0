@@ -5,7 +5,7 @@
 
 This project showcase basics of what realworld project architecture would be, 
 
-Kotlin, coroutines, Room db all tied with mvvm architecture made the application seamless to use.
+**Kotlin**, **Coroutines**, **Room** db all tied with **MVVM** architecture made the application seamless to use.
 
 Anyone out there who is passionate about learning andorid application dev can download this project.
 
