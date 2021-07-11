@@ -4,6 +4,7 @@ The project was inspired by the curiosity of learning and update my skills in an
 It aims to provide an attractive look and follow the most recent design guidelines as well as.
 Kotlin, coroutines, Room db all tied with mvvm architecture made the application seamless to use.
 
+![ssgit (1)](https://user-images.githubusercontent.com/39851751/125205712-475fba00-e2a1-11eb-9616-9efee23f2c74.png)
 
 ## Features
 - Manage your notes using categories.
